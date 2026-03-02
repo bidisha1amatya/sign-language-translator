@@ -1,0 +1,20 @@
+.stories-page {
+  padding: 4rem 2.5rem;
+  max-width: 1200px; margin: 0 auto;
+}
+.stories-page .section-title { margin-bottom: 0.5rem; }
+.stories-page .section-sub   { margin-bottom: 2rem; }
+
+.stories-full-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .stories-full-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .stories-page { padding: 2rem 1.25rem; }
+  .stories-full-grid { grid-template-columns: 1fr; }
+}

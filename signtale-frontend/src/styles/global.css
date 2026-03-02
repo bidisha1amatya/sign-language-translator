@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink:     #FFB3C6;
+  --yellow:   #FFF0A0;
+  --mint:     #B8F0D8;
+  --lavender: #D8CCFF;
+  --sky:      #B8E4FF;
+  --peach:    #FFD4B8;
+  --cream:    #FFFBF4;
+  --ink:      #1A1523;
+  --muted:    #6B6478;
+  --border:   rgba(26,21,35,0.08);
+  --shadow:   0 4px 24px rgba(26,21,35,0.08);
+  --shadow-hover: 0 12px 40px rgba(26,21,35,0.14);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+/* Shared buttons */
+.btn-primary {
+  padding: 14px 28px; border-radius: 999px;
+  background: var(--ink); color: var(--cream);
+  font-size: 1rem; font-weight: 600; cursor: pointer;
+  border: none; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+.btn-secondary {
+  padding: 14px 28px; border-radius: 999px;
+  background: transparent; color: var(--ink);
+  font-size: 1rem; font-weight: 600; cursor: pointer;
+  border: 2px solid var(--border); transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--ink); }
+
+/* Shared section styles */
+.section { padding: 5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+.section-tag {
+  display: inline-block; font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.75rem;
+}
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 900; letter-spacing: -1px;
+  color: var(--ink); margin-bottom: 0.75rem;
+}
+.section-sub {
+  font-size: 1rem; color: var(--muted); line-height: 1.6; max-width: 480px;
+}
+
+@media (max-width: 768px) {
+  .section { padding: 3rem 1.25rem; }
+}

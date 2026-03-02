@@ -1,0 +1,29 @@
+.skeleton-viewer {
+  width: 100%;
+  height: 400px;         /* adjust to your layout */
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background: #1a1523;
+}
+
+/* Three.js drops a <canvas> inside — make it fill the div */
+.skeleton-viewer canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Shown only when no keypoints are passed in yet */
+.skeleton-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(255, 251, 244, 0.4);
+}
+.skeleton-placeholder span { font-size: 3rem; }
+.skeleton-placeholder p    { font-size: 0.9rem; }

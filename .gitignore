@@ -1,0 +1,79 @@
+# ==============================
+# OS Files
+# ==============================
+.DS_Store
+Thumbs.db
+
+# ==============================
+# VS Code
+# ==============================
+.vscode/
+
+# ==============================
+# Environment Variables
+# ==============================
+.env
+.env.*
+*.env
+
+ml/venv310
+ml/video_keypoints_json_output
+
+
+# ==============================
+# React / Frontend
+# ==============================
+frontend/node_modules/
+frontend/build/
+frontend/.cache/
+frontend/.parcel-cache/
+
+index.html
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# ==============================
+# Python / Backend
+# ==============================
+backend/venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+db.sqlite3
+
+# Django specific
+*.log
+staticfiles/
+media/
+
+# ==============================
+# ML / AI (Important for you)
+# ==============================
+*.h5
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.pkl
+*.joblib
+
+
+# ==============================
+# Build / Dist
+# ==============================
+dist/
+build/
+
+# ==============================
+# Misc
+# ==============================
+coverage/
+*.coverage
+
+ml/dataset

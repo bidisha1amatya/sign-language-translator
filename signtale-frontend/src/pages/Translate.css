@@ -1,0 +1,83 @@
+.translate-page {
+  padding: 4rem 2.5rem;
+  max-width: 1200px; margin: 0 auto;
+}
+.translate-page .section-sub { margin-bottom: 2.5rem; }
+
+.translate-grid {
+  background: linear-gradient(135deg, var(--lavender), var(--sky), var(--mint));
+  border-radius: 28px; padding: 3rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2.5rem; align-items: start;
+}
+
+/* Input side */
+.translate-box {
+  background: white; border-radius: 20px; padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.translate-label {
+  display: block; font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--muted); margin-bottom: 0.75rem;
+}
+.translate-textarea {
+  width: 100%; border: none; outline: none; resize: none;
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; line-height: 1.6;
+  color: var(--ink); background: transparent; height: 130px;
+}
+.translate-textarea::placeholder { color: #ccc; }
+
+.translate-actions {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-top: 1rem;
+  padding-top: 0.75rem; border-top: 1.5px solid var(--border);
+}
+.char-count { font-size: 0.8rem; color: var(--muted); }
+
+.btn-translate {
+  padding: 10px 22px; border-radius: 999px;
+  background: var(--ink); color: var(--cream);
+  font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  border: none; transition: all 0.2s;
+}
+.btn-translate:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn-translate:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.translate-tip {
+  margin-top: 1rem; padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.5); border-radius: 14px;
+  font-size: 0.82rem; color: var(--muted); line-height: 1.5;
+}
+
+/* Output side */
+.translate-output {
+  background: white; border-radius: 20px;
+  box-shadow: var(--shadow); min-height: 240px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.translate-state { text-align: center; color: var(--muted); }
+.translate-state p { font-size: 0.9rem; margin-top: 1rem; }
+.translate-error { color: #c0392b; font-weight: 600; font-size: 0.9rem; }
+
+.translate-placeholder { text-align: center; color: var(--muted); }
+.placeholder-icon { font-size: 3rem; display: block; margin-bottom: 0.75rem; }
+.translate-placeholder p { font-size: 0.9rem; }
+
+.translate-animating {
+  font-family: 'Fraunces', serif; font-size: 0.9rem;
+  font-weight: 700; color: var(--muted); margin-top: 8px;
+}
+
+.spinner {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 3px solid var(--border); border-top-color: var(--ink);
+  animation: spin 0.8s linear infinite; margin: 0 auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 768px) {
+  .translate-grid { grid-template-columns: 1fr; padding: 1.5rem; }
+  .translate-page { padding: 2rem 1.25rem; }
+}
