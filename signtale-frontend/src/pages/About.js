@@ -36,13 +36,13 @@ const team = [
   },
   {
     name:  "Prasanna Shakya",
-    email: "prasanna@example.com",
+    email: "0431ps@gmail.com",
     img:   "/prasanna.jpg",
     bg:    "linear-gradient(135deg, var(--mint), var(--sky))",
   },
   {
     name:  "Prinska Maharjan",
-    email: "prinska@example.com",
+    email: "mprinska19@gmail.com",
     img:   "/prinska.png",
     bg:    "linear-gradient(135deg, var(--yellow), var(--peach))",
   },
@@ -58,7 +58,7 @@ export default function About() {
   return (
     <main>
       <div className="about-hero">
-        <span className="section-tag">ℹ️ About</span>
+        <span className="section-tag">About</span>
         <h2 className="section-title">Making stories accessible for everyone</h2>
         <p className="about-intro">
           Signtale is a research-driven project combining NLP, ML, and 3D animation to bridge
@@ -76,7 +76,7 @@ export default function About() {
       </div>
 
       <div className="about-team-section">
-        <span className="section-tag">👥 The Team</span>
+        <span className="section-tag">The Team</span>
         <h2 className="section-title">Meet the people behind Signtale</h2>
         <div className="about-team-grid">
           {team.map((member) => (

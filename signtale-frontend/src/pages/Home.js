@@ -72,7 +72,7 @@ export default function Home() {
           </button>
         </div>
         <div className="home-stories-grid">
-          {stories.slice(0, 3).map((s) => (
+          {stories.slice(0, 1).map((s) => (
             <StoryCard key={s.id} story={s} />
           ))}
         </div>
@@ -92,7 +92,7 @@ export default function Home() {
             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
               <button className="btn-primary" style={{ fontSize: "0.9rem", padding: "10px 22px" }}
                 onClick={() => navigate("/translate")}>
-                ✨ Try Translate
+                 Try Translate
               </button>
             </div>
           </div>

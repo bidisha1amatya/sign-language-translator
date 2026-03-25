@@ -212,7 +212,7 @@ function draw2D(canvas, joints) {
   // ── Head circle around nose ──
   const nose = joints["nose"];
   if (nose) {
-    const pn    = pt(nose);
+    const pn    = { x: pt(nose).x, y: pt(nose).y + scale * 0.08 };
     const headR = scale * 0.25;
     ctx.beginPath();
     ctx.arc(pn.x, pn.y, headR, 0, Math.PI * 2);

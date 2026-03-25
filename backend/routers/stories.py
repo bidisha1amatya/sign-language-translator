@@ -29,7 +29,7 @@ MOCK_STORIES = [
         "tag_bg": "#FFE4A0",
         "title": "The Golden Touch",
         "desc": "A king learns that greed comes with a price.",
-        "duration": "2 min",
+        "duration": "1 min",
         "level": "intermediate",
         "text": (
             "King received a wish and he wished that everything he touched would turn gold. "
@@ -100,8 +100,13 @@ async def get_story(story_id: str):
 
    
     try:
-        glosses       = text_to_gloss(story["text"])
-        pairs, oov    = glosses_to_word_id_pairs(glosses)      # ← changed
+        # ── Step 1: Text → Gloss sequences (one list per clause/sentence) ────────
+        gloss_sequences = text_to_gloss(story["text"])          # list[list[str]]
+
+        # ── Step 2: Flatten for vocab lookup & display ───────────────────────────
+        glosses = [token for seq in gloss_sequences for token in seq]  # flat list[str]
+
+        pairs, oov    = glosses_to_word_id_pairs(glosses)
         gloss_ids     = [gid for _, gid in pairs]
 
         if oov:

@@ -14,7 +14,6 @@ import spacy
 
 logger = logging.getLogger(__name__)
 
-# Load once at import time
 try:
     nlp = spacy.load("en_core_web_sm")
     logger.info("spaCy en_core_web_sm loaded.")
@@ -24,7 +23,7 @@ except OSError:
         "  python -m spacy download en_core_web_sm"
     )
 
-# ─── Constants (copied exactly from data_preprocessing.py) ───────────────────
+# ─── Constants ────────────────────────────────────────────────────────────────
 
 STOP_WORDS = {
     "a", "an", "the",
@@ -57,7 +56,7 @@ NUMBER_MAP = {
     "18": "EIGHTEEN", "19": "NINETEEN", "20": "TWENTY"
 }
 
-# ─── Helpers (copied exactly from data_preprocessing.py) ─────────────────────
+# ─── Helpers ──────────────────────────────────────────────────────────────────
 
 def remove_special_characters(text: str) -> str:
     text = re.sub(r"[^a-zA-Z0-9\s']", "", text)
@@ -76,7 +75,6 @@ def preprocess_contractions(text: str) -> str:
     }
     for c, e in contractions.items():
         text = re.sub(rf"\b{c}\b", e, text, flags=re.IGNORECASE)
-    # 's → is
     text = re.sub(r"(\w+)'s\b", r"\1 is", text)
     return text
 
@@ -88,18 +86,18 @@ def number_to_gloss(num: str) -> str:
     return num
 
 def english_to_asl_gloss(sentence: str) -> str:
-    """Copied verbatim from data_preprocessing.py."""
+    """Convert a single sentence to an ASL gloss string."""
     sentence = remove_special_characters(sentence)
     sentence = preprocess_contractions(sentence)
     doc = nlp(sentence)
 
-    time_tokens = []
-    subjects    = []
+    time_tokens  = []
+    subjects     = []
     noun_phrases = []
-    verbs       = []
-    others      = []
-    negation    = []
-    current_np  = []
+    verbs        = []
+    others       = []
+    negation     = []
+    current_np   = []
 
     for token in doc:
         word = token.text.lower()
@@ -140,22 +138,46 @@ def english_to_asl_gloss(sentence: str) -> str:
     gloss = time_tokens + subjects + noun_phrases + verbs + others + negation
     return " ".join(gloss)
 
-# ─── Public API (called by routers/translate.py) ──────────────────────────────
+# ─── Sentence splitter ────────────────────────────────────────────────────────
 
-def text_to_gloss(text: str) -> list[str]:
+def split_into_sentences(text: str) -> list[str]:
+    """
+    Split on full stops using spaCy's sentence boundary detection.
+    """
+    doc = nlp(text)
+    return [sent.text.strip() for sent in doc.sents if sent.text.strip()]
+
+# ─── Public API ───────────────────────────────────────────────────────────────
+
+def text_to_gloss(text: str) -> list[list[str]]:
     """
     Entry point for the backend pipeline.
-    Returns a list of uppercase gloss tokens.
 
-    Example:
-        text_to_gloss("She's going to school tomorrow.")
-        → ["TOMORROW", "SHE", "SCHOOL", "GO"]
+    Splits input on sentence boundaries (full stops), then converts
+    each sentence independently to a gloss token sequence.
+
+    Returns:
+        list[list[str]] — one inner list per sentence.
+
+    Examples:
+        text_to_gloss("I love cats. She hates dogs.")
+        → [["CAT", "LOVE"], ["SHE", "DOG", "HATE"]]
+
+        text_to_gloss("I went to school and she came home.")
+        → [["SCHOOL", "GO", "SHE", "HOME", "COME"]]  # treated as one sentence
     """
     if not text or not text.strip():
         return []
 
-    gloss_str = english_to_asl_gloss(text.strip())
-    logger.debug(f"[preprocessor] '{text}' → '{gloss_str}'")
+    sentences = split_into_sentences(text.strip())
+    all_gloss_sequences = []
 
-    # Split into list, drop any empty strings
-    return [g for g in gloss_str.split() if g]
+    for sentence in sentences:
+        gloss_str = english_to_asl_gloss(sentence.strip())
+        logger.debug(f"[preprocessor] '{sentence}' → '{gloss_str}'")
+
+        tokens = [g for g in gloss_str.split() if g]
+        if tokens:
+            all_gloss_sequences.append(tokens)
+
+    return all_gloss_sequences

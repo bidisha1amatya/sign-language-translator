@@ -76,14 +76,15 @@ async def translate(req: TranslateRequest):
 
     # ── Step 1: Text → Gloss ────────────────────────────────────────────────
     logger.info(f"[translate] input: {text!r}")
-    glosses = text_to_gloss(text)
+    gloss_sequences = text_to_gloss(text)                          # list[list[str]]
+    glosses = [token for seq in gloss_sequences for token in seq]  # flat list[str]
     logger.info(f"[translate] glosses: {glosses}")
 
     if not glosses:
         raise HTTPException(
             status_code=422,
             detail="Could not extract any gloss words from input. "
-                   "Try a longer or more specific sentence."
+                "Try a longer or more specific sentence."
         )
 
     # ── Step 2: Gloss → (word, id) pairs ────────────────────────────────────
@@ -137,12 +138,10 @@ class GlossPreviewResponse(BaseModel):
 
 @router.post("/translate/preview-gloss", response_model=GlossPreviewResponse)
 async def preview_gloss(req: TranslateRequest):
-    """
-    Returns gloss + IDs without running the model.
-    Useful for debugging the preprocessing pipeline.
-    """
-    glosses = text_to_gloss(req.text.strip())
-    gloss_ids, oov = glosses_to_ids(glosses, skip_unknown=False)
+    gloss_sequences = text_to_gloss(req.text.strip())
+    glosses = [token for seq in gloss_sequences for token in seq]  # flatten
+    pairs, oov = glosses_to_word_id_pairs(glosses)
+    gloss_ids  = [gid for _, gid in pairs]
     return GlossPreviewResponse(
         original_text=req.text,
         glosses=glosses,

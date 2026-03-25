@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
-const links = ["home", "stories", "translate", "about"];
+const links = ["home", "translate", "stories", "about"];
 
 export default function Navbar() {
   const location = useLocation();

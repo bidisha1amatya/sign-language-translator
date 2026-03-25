@@ -16,7 +16,7 @@
 // export default stories;
 
 const stories = [
-  { id: 1, emoji: "🌟", bg: "#FFF0A0", tag: "Beginner",  tagBg: "#FFF0A0", title: "The Lucky Star",    desc: "A tale of wishes and magic under the night sky.",          duration: "2 min" },
+  { id: 1, emoji: "👑", bg: "#FFF0A0", tag: "Story",  tagBg: "#FFF0A0", title: "The Golden Touch",    desc: "King learns that greed comes with a price.",          duration: "1 min" },
   { id: 2, emoji: "🦁", bg: "#FFD4B8", tag: "Adventure", tagBg: "#FFD4B8", title: "The Brave Lion",    desc: "Courage, friendship and the heart of a jungle king.",       duration: "3 min" },
   { id: 3, emoji: "🌊", bg: "#B8E4FF", tag: "Nature",    tagBg: "#B8E4FF", title: "Ocean Dreams",      desc: "Dive deep into the secrets of the blue sea.",              duration: "4 min" },
   { id: 4, emoji: "🎨", bg: "#FFB3C6", tag: "Creative",  tagBg: "#FFB3C6", title: "Colors of Joy",     desc: "Every color tells a story of its own.",                    duration: "2 min" },
